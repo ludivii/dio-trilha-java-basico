@@ -1,10 +1,44 @@
 
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ProcessoSeletivo {
 
     public static void main(String[] args) {
-        imprimirSelecionados();
+        String[] candidatos = {"Felipe", "MARCIA", "JULIA", "PAULO", "AUGUSTO"};
+        
+        for(String candidato : candidatos){
+            entrandoEmContato(candidato);
+        }
+    }
+
+    static void entrandoEmContato(String candidato){
+        int tentativasRealizadas = 1;
+        boolean continuarTentando = true;
+        boolean atendeu = false;
+
+        do { 
+            atendeu = atender();
+            continuarTentando = !atendeu;
+
+            if (continuarTentando == true){
+                tentativasRealizadas++;
+            } else{
+                System.out.println("CONTATO REALIZADO COM CANDIDATO(A) " + candidato.toUpperCase() + " FEITO COM SUCESSO");
+            }
+
+        } while (tentativasRealizadas < 3 && continuarTentando == true);
+
+            if (atendeu == true){
+                System.out.println("CONSEGUIMOS CONTATO COM " + candidato.toUpperCase() + " NA " + tentativasRealizadas + " TENTATIVA");
+            } else {
+                System.out.println("NÃO CONSEGUIMOS CONTATO COM " + candidato.toUpperCase() + ", NÚMERO MAXIMO DE TENTATIVAS " + tentativasRealizadas + " REALIZADA");
+            }
+        
+    }
+
+    static boolean atender(){
+        return new Random().nextInt(3)==1;
     }
 
     static void imprimirSelecionados(){
@@ -17,7 +51,7 @@ public class ProcessoSeletivo {
         }
 
         System.out.println("");
-        
+
         System.out.println("Forma abreviada de interação for each");
 
         for(String candidato : candidatos){
